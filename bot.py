@@ -37,6 +37,7 @@ from handlers.save_media import (
     save_media_in_channel,
     save_batch_media_in_channel
 )
+from app import web_server
 
 MediaList = {}
 
@@ -47,6 +48,12 @@ Bot = Client(
     api_id=Config.API_ID,
     api_hash=Config.API_HASH
 )
+
+async def start(self):
+    app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, 8080).start()
 
 
 @Bot.on_message(filters.private)
