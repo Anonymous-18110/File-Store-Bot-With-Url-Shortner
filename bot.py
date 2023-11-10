@@ -38,7 +38,7 @@ from handlers.save_media import (
     save_batch_media_in_channel
 )
 from aiohttp import web
-from app import web_server
+from handlers import web_server
 
 MediaList = {}
 
